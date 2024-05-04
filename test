@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSC 통신 예제</title>
+</head>
+<body>
+  <button onclick="sendMessage(1)">1</button>
+  <button onclick="sendMessage(2)">2</button>
+  <button onclick="sendMessage(3)">3</button>
+
+  <script src="https://cdn.jsdelivr.net/npm/osc/dist/osc-browser.min.js"></script>
+  <script>
+    const osc = new OSC();
+    osc.open({host: '127.0.0.1', port: 9000}); // OSC 서버의 호스트와 포트를 지정해주세요.
+
+    function sendMessage(number) {
+      const message = new OSC.Message('/number', number);
+      osc.send(message);
+      console.log('Sent number:', number);
+    }
+  </script>
+</body>
+</html>
